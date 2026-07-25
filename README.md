@@ -134,6 +134,24 @@ NODE_ENV=production npm start
 listens on `PORT`). Make sure `.env` (or your process manager's env) sets
 `JWT_SECRET`, `MONGODB_URI`, `CORS_ORIGIN`, and `NODE_ENV=production`.
 
+## Deploy on Render
+
+This repo includes a `render.yaml` blueprint so you can create the service
+with the same build/start settings every time.
+
+1. Push this repo to GitHub.
+2. In Render, choose **New** → **Blueprint** and connect this repository.
+3. Render will read `render.yaml` and create the web service.
+4. Set the secret environment variables in the Render dashboard:
+  - `MONGODB_URI` from your Atlas cluster
+  - `JWT_SECRET`
+5. Keep `NODE_ENV=production` and `JWT_EXPIRES_IN=7d`.
+6. After deploy, check `GET /health` on the Render URL.
+
+For a native APK client, the API URL should point to the Render service. If
+you also have a browser-based client, tighten `CORS_ORIGIN` to the exact
+frontend origin before going beyond personal testing.
+
 ## API overview
 
 Base path: `/api/v1`. Full contract lives in `../docs/ARCHITECTURE.md`. Quick

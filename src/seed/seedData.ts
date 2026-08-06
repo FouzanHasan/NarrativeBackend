@@ -90,7 +90,7 @@ export async function seedDemoData(): Promise<{ email: string; password: string;
 async function run(): Promise<void> {
   // Deferred imports so this file can be unit-tested without triggering a
   // real DB connection when only seedDemoData() is exercised.
-  const { connectDB, disconnectDB } = await import('../config/db');
+  const { connectDB, disconnectDB } = await import('../config/db.js');
   await connectDB();
   const result = await seedDemoData();
   // eslint-disable-next-line no-console
